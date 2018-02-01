@@ -43,7 +43,7 @@ class Postman
           {
             foreach ($val['rules'] as $rule)
             {
-              $result = $this->$rule['slug']->do_validate($post, $rule['value']);
+              $result = $this->{$rule['slug']}->do_validate($post, $rule['value']);
               if ($result['status'] !== 'success')
               {
                 $status = $result['status'];
