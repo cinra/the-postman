@@ -101,7 +101,7 @@ class Postman
 
     if (!$this->results) return false;
 
-    $result = true;
+    $result = false;
 
     $templates = $this->get_templates();
 
