@@ -14,6 +14,7 @@ class Postman
   public $rules = array();
   private $posts = array();
   private $files = array();
+  private $method;
   private $results;
 
   // TODO: 値の検証／バリデーション。DBに登録されていない値は破棄するように。
@@ -25,6 +26,12 @@ class Postman
       'status' => 'success',
       'values' => array(),
     );
+
+    if ($this->method !== 'post')
+    {
+      $this->results['status'] = 'error';
+      return $this->results;
+    }
 
     if ($this->vals)
     {
@@ -306,6 +313,7 @@ class Postman
 
     $this->posts = $_POST;
     $this->files = $_FILES;
+    $this->method = isset($_SERVER['REQUEST_METHOD']) ? strtolower($_SERVER['REQUEST_METHOD']) : 'get';
 
   }
 
