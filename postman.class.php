@@ -107,7 +107,7 @@ class Postman
 
     $types = $this->get('_type');
 
-    if (!$types) return true;
+    if (!$types) return false;
 
     if (!is_array($types)) $types = array($types);
 
