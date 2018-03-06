@@ -101,13 +101,13 @@ class Postman
 
     if (!$this->results) return false;
 
-    $result = true;
+    $result = false;
 
     $templates = $this->get_templates();
 
     $types = $this->get('_type');
 
-    if (!$types) return true;
+    if (!$types) return false;
 
     if (!is_array($types)) $types = array($types);
 
