@@ -36,29 +36,27 @@ class Postman
         $status = 'success';
 
         // $_POST
-        if (null !== ($post = $this->get($key)))
-        {
+        $post = $this->get($key);
 
-          if ($val['rules'])
+        if ($val['rules'])
+        {
+          foreach ($val['rules'] as $rule)
           {
-            foreach ($val['rules'] as $rule)
+            $result = $this->{$rule['slug']}->do_validate($post, $rule['value']);
+            if ($result['status'] !== 'success')
             {
-              $result = $this->{$rule['slug']}->do_validate($post, $rule['value']);
-              if ($result['status'] !== 'success')
-              {
-                $status = $result['status'];
-                $message[] = $result['message'];
-                $this->results['status'] = 'error';
-              }
+              $status = $result['status'];
+              $message[] = $result['message'];
+              $this->results['status'] = 'error';
             }
           }
-
-          $this->results['values'][$key] = array(
-            'status' => $status,
-            'value' => $post,
-            'message' => $message,
-          );
         }
+
+        $this->results['values'][$key] = array(
+          'status'    => $status,
+          'value'     => $post,
+          'message'   => $message,
+        );
 
         // $_FILES
         if (null !== ($post = $this->get_file($key)))
@@ -124,10 +122,10 @@ class Postman
         $body = $this->compose_mail($template['body']);
 
         $args = array(
-          'to' => $to,
-          'subject' => $subject,
-          'body' => $body,
-          'is_spam' => false,
+          'to'        => $to,
+          'subject'   => $subject,
+          'body'      => $body,
+          'is_spam'   => false,
         );
 
         do_action_ref_array( 'postman_set_mail', array( &$args ) );
