@@ -112,7 +112,7 @@ class Postman
 
     $types = $this->get('_type');
 
-    if (!$types) return false;
+    if (!$types) return true;// テンプレートが指定されていない場合は、そのまま処理を続ける
 
     if (!is_array($types)) $types = array($types);
 
