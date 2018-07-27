@@ -17,7 +17,7 @@ function postman_admin_menu()
     $icon_url = 'dashicons-email-alt';
   }
   
-  add_object_page(
+  add_menu_page(
     __( 'the Postman', 'the-postman' ),
     __( 'the Postman', 'the-postman' ),
     'edit_posts',
@@ -126,11 +126,11 @@ function the_postman_manage_form()
   <tbody>
     <tr valign="top">
       <th scope="row"><label for="for_label"><?php _e('Label', 'the-postman')?></label></th>
-      <td><input name="field[<?php echo $key?>][label]" type="text" id="for_label" value="<?php echo $value['label']?>" class="regular-text"></td>
+      <td><input name="field[<?php echo $key?>][label]" type="text" id="for_label" value="<?php if(isset($value['label'])) echo $value['label']?>" class="regular-text"></td>
     </tr>
     <tr valign="top">
       <th scope="row"><label for="for_name"><?php _e('Name', 'the-postman')?></label></th>
-      <td><input name="field[<?php echo $key?>][name]" type="text" id="for_name" value="<?php echo $value['name']?>" class="regular-text"></td>
+      <td><input name="field[<?php echo $key?>][name]" type="text" id="for_name" value="<?php if(isset($value['label'])) echo $value['name']?>" class="regular-text"></td>
     </tr>
     <tr valign="top">
       <th scope="row"><label for="for_name"><?php _e('Rules', 'the-postman')?></label></th>
@@ -169,9 +169,9 @@ function the_postman_manage_form()
 }
 
 /* ----------------------------------------------------------
-	
-	the Postman > Mail Templates
-	
+  
+  the Postman > Mail Templates
+  
 ---------------------------------------------------------- */
 
 function the_postman_manage_mail_template()
