@@ -206,9 +206,10 @@ function the_postman_manage_mail_template()
   echo '<h2>'.__( 'Mail Templates', 'the-postman' ).'</h2>';
   
   $tpls = get_option('the-postman-mail-templates');
-  
+
+  $count = $tpls ? count($tpls) : 0;
   $tpls[] = array(
-      'type' => 'mail'.(count($tpls)+1),
+      'type' => 'mail'.($count+1),
       'subject' => '',
       'from' => '',
       'to' => '',
